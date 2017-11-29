@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
-    <main>
+    <main style="background-color: #f5f4e1;">
         <div class="row center">
-            <h4 class="font-marker">Hmm ! Miam ! j'ai mangé la page :)</h4>
-            <h1 class="font-marker">404</h1>
+            <img src="public/images/404-funny.gif">
+            <h1 class="font-marker"> 404 error, bitch !</h1>
         </div>
     </main>
     
