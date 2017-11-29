@@ -36,3 +36,18 @@ main {
 .container {
     margin-top: 5% !important;
 }
+
+.card-image div {
+    display: none;
+}
+
+.card-menu-container {
+    padding-bottom: 2%;
+    padding-top: 2%;
+}
+.card-menu-item {
+    color: #FFF;
+}
+.card-menu-item:hover {
+    background-color: #DDD;
+}

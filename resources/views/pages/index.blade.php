@@ -9,9 +9,13 @@
 			<div class="row">
                 @foreach($plats as $plat)
                     <div class="col s12 m2">
-                        <div class="card tooltipped" data-position="bottom" data-delay="50" data-tooltip="recommandé par {{ $plat->user_id }}">
+                        <div class="card tooltipped" data-position="bottom" data-delay="50" data-tooltip="recommandé par {{ $plat->user_name }}">
                             <div class="card-image">
                                 <img src="{{ $plat->url }}">
+                                <div class="card-title row animated card-menu-container">
+                                    <a href="" class="waves-effect waves-light btn col m4 offset-m1 center card-menu-item"><i class="material-icons">mode_edit</i></a>
+                                    <a href="" class="waves-effect waves-light btn col m4 offset-m2 center card-menu-item"><i class="material-icons">note_add</i></a>
+                                </div>
                                 <span class="card-title black">{{ $plat->name }}</span>
                             </div>
                             <div class="card-action">

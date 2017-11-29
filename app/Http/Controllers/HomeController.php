@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Note;
 use Illuminate\Http\Request;
 use App\Plat;
 use Validator;
@@ -28,7 +29,12 @@ class HomeController extends Controller
      */
     public function Index()
     {
-        $plats = Plat::orderBy('id', 'desc')->get();
+        //$plats = Plat::orderBy('id', 'desc')->get();
+        $plats = Plat::leftJoin('notes', 'plats.id', '=', 'notes.plat_id')
+            ->join('users', 'plats.user_id', '=', 'users.id')
+            ->select('plats.*', 'users.name AS user_name', 'notes.*')
+            ->orderBy('plats.id', 'desc')
+            ->get();
 
         return view('pages.index', ['plats' => $plats]);
     }
@@ -52,13 +58,17 @@ class HomeController extends Controller
         }
 
         $plat = new Plat;
+        $note = new Note;
         $plat->name = $request->input('name');
         $plat->price = $request->input('price');
-        $plat->mark = $request->input('mark');
-        $plat->fat = $request->input('fat');
         $plat->url = ($request->input('url') != null ? $request->input('url') : "");
-        $plat->user_id = $currentUser->name;
+        $plat->user_id = $currentUser->id;
         $plat->save();
+        $note->plat_id = $plat->id;
+        $note->mark = $request->input('mark');
+        $note->fat = $request->input('fat');
+        $note->user_id = $currentUser->id;
+        $note->save();
 
         return redirect('/');
     }

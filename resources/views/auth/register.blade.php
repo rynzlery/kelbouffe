@@ -3,11 +3,12 @@
 @section('content')
 <div class="container">
     @if (session('confirmation-success'))
-    <div class="center col s12 m8 offset-m2">
-        <div class="chip">
-            <i class="close material-icons">close</i>
-            <div class="alert alert-success">
-                {{ session('confirmation-success') }}
+    <div class="row">
+        <div class="col s12 m6 offset-m3">
+            <div class="card-panel green lighten-2">
+                <span class="white-text">
+                  {{ session('confirmation-success') }}
+                </span>
             </div>
         </div>
     </div>
