@@ -1,0 +1,25 @@
+{
+  "name": "kelbouffe",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Pierre Cochard <pierre1.cochard@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "animate.css": "^3.5.2",
+    "materialize": "^0.100.2",
+    "pickadate": "^3.5.6",
+    "datatables": "^1.10.16"
+  }
+}
