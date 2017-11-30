@@ -25,8 +25,5 @@ Route::get('/', 'HomeController@Index');
 Route::post('/Create', 'HomeController@Create');
 
 /*AJAX calls*/
-Route::post('/AddNote', 'HomeController@AddNote');
-Route::post('/AddNote', function () {
-    return Response::json(array('name' => 'risotto maison', 'id' => '10'));
-});
+Route::get('/AddNote', 'HomeController@AddNote');
 Route::post('/CreateNote', 'HomeController@CreateNote');

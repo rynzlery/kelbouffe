@@ -73,10 +73,9 @@ class HomeController extends Controller
         return redirect('/');
     }
 
-    public function AddNote($id) {
-        //$plat = Plat::findOrFail($id);
-        //return $plat->toJson();
-        return Response::json(array('name' => 'risotto maison', 'id' => '10'));
+    public function AddNote(Request $request) {
+        $plat = Plat::findOrFail($request->id);
+        return $plat->toJson();
     }
 
     public function CreateNote(Request $request) {

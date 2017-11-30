@@ -10,18 +10,19 @@
     function NewNote(id) {
         $.ajax({
             url: '{{ URL::to('AddNote') }}',
-            type: 'POST',
+            type: 'GET',
             data: {id: id},
             dataType: 'JSON',
             beforeSend: function(){
-                debugger;
             },
             success: function (data) {
-                debugger;
                 console.log(data);
             },
+            error: function(xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                console.log(err.Message);
+            },
             complete: function(){
-                debugger;
             }
         });
     };
