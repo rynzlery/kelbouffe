@@ -72,4 +72,38 @@ class HomeController extends Controller
 
         return redirect('/');
     }
+
+    public function AddNote($id) {
+        //$plat = Plat::findOrFail($id);
+        //return $plat->toJson();
+        return Response::json(array('name' => 'risotto maison', 'id' => '10'));
+    }
+
+    public function CreateNote(Request $request) {
+        $currentUser = Auth::user();
+
+        $validator = Validator::make($request->all(), [
+            'mark' => 'required',
+            'fat' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            Session::flash('flash_message', 'données manquantes ou erronées');
+            return redirect('/')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $plat = Plat::findOrFail($request->input('plat_id'));
+        if($plat != null) {
+            $note = new Note;
+            $note->plat_id = $plat->id;
+            $note->mark = $request->input('mark');
+            $note->fat = $request->input('fat');
+            $note->user_id = $currentUser->id;
+            $note->save();
+        }
+
+        return redirect('/');
+    }
 }

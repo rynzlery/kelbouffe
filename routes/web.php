@@ -23,3 +23,10 @@ Route::get('/logout', function () {
 
 Route::get('/', 'HomeController@Index');
 Route::post('/Create', 'HomeController@Create');
+
+/*AJAX calls*/
+Route::post('/AddNote', 'HomeController@AddNote');
+Route::post('/AddNote', function () {
+    return Response::json(array('name' => 'risotto maison', 'id' => '10'));
+});
+Route::post('/CreateNote', 'HomeController@CreateNote');
