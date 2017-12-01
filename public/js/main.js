@@ -29,6 +29,7 @@ $(document).ready(function() {
     }, function(){
         $(this).children("span").stop(true, true).fadeOut();
         $(this).children("span").fadeIn();
+        //$(this).children("div").hide();
         $(this).children("div").removeClass('fadeIn');
         $(this).children("div").addClass('fadeOut');
     });

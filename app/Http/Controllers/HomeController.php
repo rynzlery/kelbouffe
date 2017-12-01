@@ -30,11 +30,17 @@ class HomeController extends Controller
     public function Index()
     {
         //$plats = Plat::orderBy('id', 'desc')->get();
-        $plats = Plat::leftJoin('notes', 'plats.id', '=', 'notes.plat_id')
+        $plats = Plat::join('notes', 'plats.id', '=', 'notes.plat_id')
             ->join('users', 'plats.user_id', '=', 'users.id')
             ->select('plats.*', 'users.name AS user_name', 'notes.*')
             ->orderBy('plats.id', 'desc')
             ->get();
+        /*$plats = Plat::join('notes', function ($join) {
+            $join->on('plats.id', '=', 'notes.plat_id')->first();
+        })->join('users', 'plats.user_id', '=', 'users.id')
+            ->select('plats.*', 'users.name AS user_name', 'notes.*')
+            ->orderBy('plats.id', 'desc')
+            ->get();*/
 
         return view('pages.index', ['plats' => $plats]);
     }
@@ -73,15 +79,18 @@ class HomeController extends Controller
         return redirect('/');
     }
 
-    public function AddNote(Request $request) {
+    public function AddNote(Request $request)
+    {
         $plat = Plat::findOrFail($request->id);
         return $plat->toJson();
     }
 
-    public function CreateNote(Request $request) {
+    public function CreateNote(Request $request)
+    {
         $currentUser = Auth::user();
 
         $validator = Validator::make($request->all(), [
+            'plat_id' => 'required',
             'mark' => 'required',
             'fat' => 'required'
         ]);
@@ -96,7 +105,7 @@ class HomeController extends Controller
         $plat = Plat::findOrFail($request->input('plat_id'));
         if($plat != null) {
             $note = new Note;
-            $note->plat_id = $plat->id;
+            $note->plat_id = $request->input('plat_id');
             $note->mark = $request->input('mark');
             $note->fat = $request->input('fat');
             $note->user_id = $currentUser->id;

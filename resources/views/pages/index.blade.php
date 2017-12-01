@@ -12,10 +12,12 @@
                         <div class="card tooltipped" data-position="bottom" data-delay="50" data-tooltip="recommandé par {{ $plat->user_name }}">
                             <div class="card-image">
                                 <img src="{{ $plat->url }}">
-                                <div class="card-title row animated card-menu-container">
-                                    <a onclick="EditPlat()" class="waves-effect waves-light btn col m4 offset-m1 center card-menu-item"><i class="material-icons">mode_edit</i></a>
-                                    <a onclick="NewNote({{ $plat->id }})" class="waves-effect waves-light btn col m4 offset-m2 center card-menu-item"><i class="material-icons">note_add</i></a>
-                                </div>
+                                @if(Auth::user())
+                                    <div class="card-title row animated card-menu-container">
+                                        <a onclick="EditPlat({{ $plat->plat_id }})" class="waves-effect waves-light btn col m4 offset-m1 center card-menu-item"><i class="material-icons">mode_edit</i></a>
+                                        <a onclick="NewNote({{ $plat->plat_id }})" class="waves-effect waves-light btn col m4 offset-m2 center card-menu-item"><i class="material-icons">note_add</i></a>
+                                    </div>
+                                @endif
                                 <span class="card-title black">{{ $plat->name }}</span>
                             </div>
                             <div class="card-action">
@@ -91,6 +93,41 @@
                 </div>
                 <div class="row">
                     <button class="btn waves-effect waves-light orange darken-4" type="submit" name="submit">Valider
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="modal-add-note" class="modal">
+    <div class="modal-content">
+        <h4 id="titre-modale-add-note">Ajouter une note à </h4>
+        <div class="row">
+            <form class="col s12" action="CreateNote" method="post">
+                <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                <input id="hidden-plat_id" name="plat_id" type="hidden" value=""/>
+                <div class="row">
+                    <div class="input-field col m2 s12">
+                        <label>Qualité</label>
+                    </div>
+                    <div class="input-field col m4 s12">
+                        <p class="range-field">
+                            <input type="range" id="mark" min="0" max="5" name="mark" />
+                        </p>
+                    </div>
+                    <div class="input-field col m2 s12">
+                        <label>Pétage de bide</label>
+                    </div>
+                    <div class="input-field col m4 s12">
+                        <p class="range-field">
+                            <input type="range" id="fat" min="0" max="5" name="fat" />
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn center waves-effect waves-light orange darken-4" type="submit" name="submit">Valider
                         <i class="material-icons right">send</i>
                     </button>
                 </div>

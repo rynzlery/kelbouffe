@@ -17,6 +17,9 @@
             },
             success: function (data) {
                 console.log(data);
+                $('#modal-add-note').modal('open');
+                $('#titre-modale-add-note').append(data.name);
+                $('#hidden-plat_id').val(data.id);
             },
             error: function(xhr, status, error) {
                 var err = eval("(" + xhr.responseText + ")");
