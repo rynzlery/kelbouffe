@@ -29,18 +29,7 @@ class HomeController extends Controller
      */
     public function Index()
     {
-        //$plats = Plat::orderBy('id', 'desc')->get();
-        $plats = Plat::join('notes', 'plats.id', '=', 'notes.plat_id')
-            ->join('users', 'plats.user_id', '=', 'users.id')
-            ->select('plats.*', 'users.name AS user_name', 'notes.*')
-            ->orderBy('plats.id', 'desc')
-            ->get();
-        /*$plats = Plat::join('notes', function ($join) {
-            $join->on('plats.id', '=', 'notes.plat_id')->first();
-        })->join('users', 'plats.user_id', '=', 'users.id')
-            ->select('plats.*', 'users.name AS user_name', 'notes.*')
-            ->orderBy('plats.id', 'desc')
-            ->get();*/
+        $plats = Plat::orderBy('id', 'desc')->with('notes')->get();
 
         return view('pages.index', ['plats' => $plats]);
     }

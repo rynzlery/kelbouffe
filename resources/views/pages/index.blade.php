@@ -23,12 +23,12 @@
                             <div class="card-action">
                                 <p class="nomargin" href="#">Prix : <b>{{ $plat->price }}€</b></p>
                                 <p class="nomargin" href="#">Qualité :<br>
-                                    @for($i = 0 ; $i < $plat->mark ; $i++)
+                                    @for($i = 0 ; $i < $plat->notes->first()->mark ; $i++)
                                         ⭐
                                     @endfor
                                 </p>
                                 <p class="nomargin" href="#">Pétage de bide :<br>
-                                    @for($i = 0 ; $i < $plat->fat ; $i++)
+                                    @for($i = 0 ; $i < $plat->notes->first()->fat ; $i++)
                                         ⭐
                                     @endfor
                                 </p>
