@@ -49,7 +49,7 @@
     @if(Auth::user())
         <div class="fixed-action-btn">
             <a id="add-plat-btn" class="btn-floating btn-large orange darken-4">
-                <i class="waves-effect waves-light large material-icons modal-trigger" href="#modal-add">add</i>
+                <i class="waves-effect waves-light large material-icons modal-trigger" href="#modal-add" onclick="EmptyModal()">add</i>
             </a>
         </div>
     @endif
@@ -58,10 +58,11 @@
 <!-- Modal Structure -->
 <div id="modal-add" class="modal bottom-sheet">
     <div class="modal-content">
-        <h4>Un nouveau plat à partager ?</h4>
+        <h4 id="title-modal-plat">Un nouveau plat à partager ?</h4>
         <div class="row">
             <form class="col s12" action="Create" method="post">
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                <input class="hidden-plat_id" name="plat_id" type="hidden" value=""/>
                 <div class="row">
                     <div class="input-field col m4 s12">
                         <input id="name" type="text" class="validate" name="name">

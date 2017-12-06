@@ -30,6 +30,35 @@
         });
     };
 
+    function EditPlat(id) {
+        $.ajax({
+            url: '{{ URL::to('EditPlat') }}',
+            type: 'GET',
+            data: {id: id},
+            dataType: 'JSON',
+            beforeSend: function(){
+            },
+            success: function (data) {
+                console.log(data);
+                $('#modal-add').modal('open');
+                $('#title-modal-plat').html("Modifier le plat " + data.name);
+                $('#hidden-plat_id').val(data.id);
+                $('#name').val(data.name);
+                $('#price').val(data.price);
+                //$('#mark').val(data.mark);
+                //$('#fat').val(data.fat);
+                $('#url').val(data.url);
+                $('label').addClass('active');
+            },
+            error: function(xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                console.log(err.Message);
+            },
+            complete: function(){
+            }
+        });
+    }
+
     function ModaleDeletePlat(id, name) {
         $('#modal-delete').modal('open');
         $('#titre-modale-delete-plat').html("Supprimer le plat : " + name + " ?");
@@ -38,6 +67,16 @@
 
     function DisplayTuto() {
         $('#tuto-target-1').tapTarget('open');
+    }
+
+    function EmptyModal() {
+        $('#title-modal-plat').html('Ajouter un nouveau plat ?');
+        $('#name').val("");
+        $('#price').val("");
+        $('#mark').val("");
+        $('#fat').val("");
+        $('#url').val("");
+        $('label').removeClass('active');
     }
 
     @if(!isset($cookieFirstVisit))

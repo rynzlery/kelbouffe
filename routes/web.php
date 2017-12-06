@@ -27,6 +27,6 @@ Route::post('/Create', 'HomeController@Create');
 /*AJAX calls*/
 Route::get('/AddNote', 'HomeController@AddNote');
 Route::post('/CreateNote', 'HomeController@CreateNote');
-Route::get('/EditNote', 'HomeController@EditNote');
+Route::get('/EditPlat', 'HomeController@EditPlat');
 Route::post('/UpdateNote', 'HomeController@UpdateNote');
 Route::post('/DeletePlat', 'HomeController@DeletePlat');

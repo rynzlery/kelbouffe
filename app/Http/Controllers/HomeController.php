@@ -112,6 +112,12 @@ class HomeController extends Controller
         return redirect('/');
     }
 
+    public function EditPlat(Request $request)
+    {
+        $plat = Plat::findOrFail($request->id);
+        return $plat->toJson();
+    }
+
     public function DeletePlat(Request $request)
     {
         $plat = Plat::destroy($request->id);
