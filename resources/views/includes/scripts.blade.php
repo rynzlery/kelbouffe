@@ -18,7 +18,7 @@
             success: function (data) {
                 console.log(data);
                 $('#modal-add-note').modal('open');
-                $('#titre-modale-add-note').append("Ajouter une note à " + data.name);
+                $('#titre-modale-add-note').html("Ajouter une note à " + data.name);
                 $('#hidden-plat_id').val(data.id);
             },
             error: function(xhr, status, error) {
