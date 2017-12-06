@@ -45,8 +45,8 @@
                 $('.hidden-plat_id').val(data.id);
                 $('#name').val(data.name);
                 $('#price').val(data.price);
-                //$('#mark').val(data.mark);
-                //$('#fat').val(data.fat);
+                $('#mark').prop( "disabled", true );
+                $('#fat').prop( "disabled", true );
                 $('#url').val(data.url);
                 $('label').addClass('active');
                 $('#form-bottom').attr('action', 'UpdatePlat');
@@ -77,6 +77,8 @@
         $('#mark').val("");
         $('#fat').val("");
         $('#url').val("");
+        $('#mark').prop( "disabled", false );
+        $('#fat').prop( "disabled", false );
         $('label').removeClass('active');
         $('#form-bottom').attr('action', 'Create');
     }
