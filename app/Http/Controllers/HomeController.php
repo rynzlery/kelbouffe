@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Plat;
 use Validator;
 use Session;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 
@@ -30,8 +31,16 @@ class HomeController extends Controller
     public function Index()
     {
         $plats = Plat::orderBy('id', 'desc')->with('notes')->get();
+        $users = User::with('notes')->get();
 
-        return view('pages.index', ['plats' => $plats]);
+        if(Cookie::get('firstVisit') == null){
+            Cookie::queue('firstVisit', 'done', 525600);
+            return view('pages.index', ['plats' => $plats, 'users' => $users, 'cookieFirstVisit' => false]);
+        }
+
+        return view('pages.index', ['plats' => $plats,
+                                    'users' => $users,
+                                    'cookieFirstVisit' => true]);
     }
 
     public function Create(Request $request)
@@ -101,6 +110,12 @@ class HomeController extends Controller
             $note->save();
         }
 
+        return redirect('/');
+    }
+
+    public function DeletePlat(Request $request)
+    {
+        $plat = Plat::destroy($request->id);
         return redirect('/');
     }
 }

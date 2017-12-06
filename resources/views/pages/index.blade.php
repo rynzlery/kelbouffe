@@ -9,13 +9,20 @@
 			<div class="row">
                 @foreach($plats as $plat)
                     <div class="col s12 m2">
-                        <div class="card tooltipped" data-position="bottom" data-delay="50" data-tooltip="recommandé par {{ $plat->user_name }}">
+                        <div class="card tooltipped" data-position="bottom" data-delay="50" data-tooltip="ajouté par
+                            @foreach($users as $user)
+                                    @if($user->id === $plat->user_id)
+                                        {{ $user->name }}
+                                    @endif
+                            @endforeach
+                                ">
                             <div class="card-image">
                                 <img src="{{ $plat->url }}">
                                 @if(Auth::user())
                                     <div class="card-title row animated card-menu-container">
-                                        <a onclick="EditPlat({{ $plat->plat_id }})" class="waves-effect waves-light btn col m4 offset-m1 center card-menu-item"><i class="material-icons">mode_edit</i></a>
-                                        <a onclick="NewNote({{ $plat->plat_id }})" class="waves-effect waves-light btn col m4 offset-m2 center card-menu-item"><i class="material-icons">note_add</i></a>
+                                        <a onclick="EditPlat({{ $plat->id }})" class="waves-effect waves-light grey btn col m4 center card-menu-item"><i class="material-icons">mode_edit</i></a>
+                                        <a onclick="NewNote({{ $plat->id }})" class="waves-effect waves-light green btn col m4 center card-menu-item"><i class="material-icons">note_add</i></a>
+                                        <a onclick="ModaleDeletePlat({{ $plat->id }}, '{{ $plat->name }}')" class="waves-effect waves-light red btn col m4 center card-menu-item"><i class="material-icons">delete_forever</i></a>
                                     </div>
                                 @endif
                                 <span class="card-title black">{{ $plat->name }}</span>
@@ -41,7 +48,7 @@
 	</div>
     @if(Auth::user())
         <div class="fixed-action-btn">
-            <a class="btn-floating btn-large orange darken-4">
+            <a id="add-plat-btn" class="btn-floating btn-large orange darken-4">
                 <i class="waves-effect waves-light large material-icons modal-trigger" href="#modal-add">add</i>
             </a>
         </div>
@@ -103,7 +110,7 @@
 
 <div id="modal-add-note" class="modal">
     <div class="modal-content">
-        <h4 id="titre-modale-add-note">Ajouter une note à </h4>
+        <h4 id="titre-modale-add-note"></h4>
         <div class="row">
             <form class="col s12" action="CreateNote" method="post">
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
@@ -114,7 +121,7 @@
                     </div>
                     <div class="input-field col m4 s12">
                         <p class="range-field">
-                            <input type="range" id="mark" min="0" max="5" name="mark" />
+                            <input type="range" id="add-mark" min="0" max="5" name="mark" />
                         </p>
                     </div>
                     <div class="input-field col m2 s12">
@@ -122,7 +129,7 @@
                     </div>
                     <div class="input-field col m4 s12">
                         <p class="range-field">
-                            <input type="range" id="fat" min="0" max="5" name="fat" />
+                            <input type="range" id="add-fat" min="0" max="5" name="fat" />
                         </p>
                     </div>
                 </div>
@@ -133,6 +140,28 @@
                 </div>
             </form>
         </div>
+    </div>
+</div>
+
+<div id="modal-delete" class="modal">
+    <div class="modal-content center">
+        <h4 id="titre-modale-delete-plat"></h4>
+        <div class="row">
+            <form class="col s12" action="DeletePlat" method="post">
+                <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                <input id="hidden-delete-plat_id" name="id" type="hidden" value=""/>
+                <a class="btn col m3 offset-m2 waves-effect waves-light red lighten-1" onclick="$('#modal-delete').modal('close');">Oulah non !</a>
+                <button class="btn col m3 offset-m2 waves-effect waves-light green lighten-1" type="submit" name="submit">Sûr de sûr</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Tap Target Structure -->
+<div class="tap-target" data-activates="add-plat-btn">
+    <div class="tap-target-content">
+        <h5>Title</h5>
+        <p>A bunch of text</p>
     </div>
 </div>
 

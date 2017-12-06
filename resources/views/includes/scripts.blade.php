@@ -18,7 +18,7 @@
             success: function (data) {
                 console.log(data);
                 $('#modal-add-note').modal('open');
-                $('#titre-modale-add-note').append(data.name);
+                $('#titre-modale-add-note').append("Ajouter une note à " + data.name);
                 $('#hidden-plat_id').val(data.id);
             },
             error: function(xhr, status, error) {
@@ -29,4 +29,19 @@
             }
         });
     };
+
+    function ModaleDeletePlat(id, name) {
+        $('#modal-delete').modal('open');
+        $('#titre-modale-delete-plat').html("Supprimer le plat : " + name + " ?");
+        $('#hidden-delete-plat_id').val(id);
+    };
+
+    function DisplayTuto() {
+        $('#tuto-target-1').tapTarget('open');
+    }
+
+    @if(!$cookieFirstVisit)
+        DisplayTuto();
+    @endif
+
 </script>
