@@ -60,7 +60,7 @@
     <div class="modal-content">
         <h4 id="title-modal-plat">Un nouveau plat à partager ?</h4>
         <div class="row">
-            <form class="col s12" action="Create" method="post">
+            <form id="form-bottom" class="col s12" action="Create" method="post">
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                 <input class="hidden-plat_id" name="plat_id" type="hidden" value=""/>
                 <div class="row">

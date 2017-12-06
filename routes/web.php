@@ -28,5 +28,5 @@ Route::post('/Create', 'HomeController@Create');
 Route::get('/AddNote', 'HomeController@AddNote');
 Route::post('/CreateNote', 'HomeController@CreateNote');
 Route::get('/EditPlat', 'HomeController@EditPlat');
-Route::post('/UpdateNote', 'HomeController@UpdateNote');
+Route::post('/UpdatePlat', 'HomeController@UpdatePlat');
 Route::post('/DeletePlat', 'HomeController@DeletePlat');

@@ -118,6 +118,40 @@ class HomeController extends Controller
         return $plat->toJson();
     }
 
+    public function UpdatePlat(Request $request)
+    {
+        $currentUser = Auth::user();
+
+        //dump($request); die();
+        $validator = Validator::make($request->all(), [
+            'plat_id' => 'required',
+            'name' => 'required|max:255',
+            'price' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            Session::flash('flash_message', 'données manquantes ou erronées');
+            return redirect('/')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $plat = Plat::find($request->input('plat_id'));
+        //$note = new Note;
+        $plat->name = $request->input('name');
+        $plat->price = $request->input('price');
+        $plat->url = ($request->input('url') != null ? $request->input('url') : "");
+        $plat->user_id = $currentUser->id;
+        $plat->save();
+        //$note->plat_id = $plat->id;
+        //$note->mark = $request->input('mark');
+        //$note->fat = $request->input('fat');
+        //$note->user_id = $currentUser->id;
+        //$note->save();
+
+        return redirect('/');
+    }
+
     public function DeletePlat(Request $request)
     {
         $plat = Plat::destroy($request->id);

@@ -42,13 +42,14 @@
                 console.log(data);
                 $('#modal-add').modal('open');
                 $('#title-modal-plat').html("Modifier le plat " + data.name);
-                $('#hidden-plat_id').val(data.id);
+                $('.hidden-plat_id').val(data.id);
                 $('#name').val(data.name);
                 $('#price').val(data.price);
                 //$('#mark').val(data.mark);
                 //$('#fat').val(data.fat);
                 $('#url').val(data.url);
                 $('label').addClass('active');
+                $('#form-bottom').attr('action', 'UpdatePlat');
             },
             error: function(xhr, status, error) {
                 var err = eval("(" + xhr.responseText + ")");
@@ -77,6 +78,7 @@
         $('#fat').val("");
         $('#url').val("");
         $('label').removeClass('active');
+        $('#form-bottom').attr('action', 'Create');
     }
 
     @if(!isset($cookieFirstVisit))
