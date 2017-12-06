@@ -33,14 +33,13 @@ class HomeController extends Controller
         $plats = Plat::orderBy('id', 'desc')->with('notes')->get();
         $users = User::with('notes')->get();
 
-        if(Cookie::get('firstVisit') == null){
+        /*if(Cookie::get('firstVisit') == null){
             Cookie::queue('firstVisit', 'done', 525600);
             return view('pages.index', ['plats' => $plats, 'users' => $users, 'cookieFirstVisit' => false]);
-        }
+        }*/
 
         return view('pages.index', ['plats' => $plats,
-                                    'users' => $users,
-                                    'cookieFirstVisit' => true]);
+                                        'users' => $users]);
     }
 
     public function Create(Request $request)
