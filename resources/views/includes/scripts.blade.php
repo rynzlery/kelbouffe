@@ -40,7 +40,7 @@
         $('#tuto-target-1').tapTarget('open');
     }
 
-    @if(!$cookieFirstVisit)
+    @if(!isset($cookieFirstVisit))
         DisplayTuto();
     @endif
 
